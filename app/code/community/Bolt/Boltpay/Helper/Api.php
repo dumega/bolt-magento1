@@ -436,7 +436,7 @@ class Bolt_Boltpay_Helper_Api extends Bolt_Boltpay_Helper_Data {
             'items'           => array_map(function ($item) use ($quote, $productMediaConfig, &$calculated_total) {
                 $image_url = $productMediaConfig->getMediaUrl($item->getProduct()->getThumbnail());
                 $product   = Mage::getModel('catalog/product')->load($item->getProductId());
-                $calculated_total += round($item->getPrice() * 100 * $item->getQty());
+                $calculated_total += round($item->getCalculationPrice() * 100 * $item->getQty());
                 return array(
                     'reference'    => $quote->getId(),
                     'image_url'    => $image_url,
