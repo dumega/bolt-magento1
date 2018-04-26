@@ -91,13 +91,7 @@ class Bolt_Boltpay_Model_ObserverTest extends PHPUnit_Framework_TestCase
             $quote,
             Bolt_Boltpay_Model_Payment::METHOD_CODE);
 
-//        $this->quotePayment->method('getMethod')
-//            ->willReturn(Bolt_Boltpay_Model_Payment::METHOD_CODE);
-
         $this->quote->setPayment($this->quotePayment);
-//        $this->quote
-//            ->method('getPayment')
-//            ->willReturn($this->quotePayment);
 
         $this->orderPayment = $this->createPartialMock(Mage_Sales_Model_Order_Payment::class,
             ['getAdditionalInformation', 'addTransaction', 'getData', 'getPayment']);
@@ -119,9 +113,6 @@ class Bolt_Boltpay_Model_ObserverTest extends PHPUnit_Framework_TestCase
 
         $this->order->method('getPayment')
             ->willReturn($this->orderPayment);
-
-//        Mage::dispatchEvent('checkout_type_onepage_save_order_after',
-//            array('order' => $this->order, 'quote' => $this->quote));
     }
 
 //    public function handleOrderUpdate(Varien_Object $order) {
@@ -186,9 +177,6 @@ class Bolt_Boltpay_Model_ObserverTest extends PHPUnit_Framework_TestCase
         $transmitResponse->is_valid = 1;
         $observerModel->method('proceedTransmit')
             ->will($this->returnValue($transmitResponse));
-
-//        $observerModel->method('sendOrderEmail')
-//            ->willReturnCallback($this->emulateSaveOrder());
 
         $observerModel->verifyOrderContents($observerObject);
 
@@ -257,9 +245,6 @@ class Bolt_Boltpay_Model_ObserverTest extends PHPUnit_Framework_TestCase
 
         $checkout->getQuote()->getPayment()->importData(array('method' => Bolt_Boltpay_Model_Payment::METHOD_CODE));
         $checkout->getQuote()->collectTotals()->save();
-
-//        $service = Mage::getModel('sales/service_quote', $checkout->getQuote());
-//        $service->submitAll();
 
         $checkout = Mage::getSingleton('checkout/type_onepage');
 
